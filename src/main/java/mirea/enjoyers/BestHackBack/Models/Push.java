@@ -30,7 +30,7 @@ public class Push {
     @Column(name = "image")
     private String image;
 
-    @Column(name = "roleDestination")
+    @Column(name = "role_destination")
     private String roleDestination;
 
     @Column(name = "status")

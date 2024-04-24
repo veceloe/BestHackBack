@@ -1,13 +1,16 @@
 package mirea.enjoyers.BestHackBack.Controllers;
 
 import mirea.enjoyers.BestHackBack.Models.Push;
+import mirea.enjoyers.BestHackBack.Models.User;
 import mirea.enjoyers.BestHackBack.Services.PushService;
 import lombok.RequiredArgsConstructor;
+import mirea.enjoyers.BestHackBack.Services.SSEService;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
@@ -22,6 +25,7 @@ import java.util.UUID;
 @CrossOrigin(origins = "http://localhost:3000")
 public class PushController {
     private final PushService pushService;
+    private final SSEService sseService;
 
     @GetMapping("/")
     public List<Push> pushes(@RequestParam(name = "title", required = false) String title) {
@@ -57,6 +61,7 @@ public class PushController {
     @PostMapping("/push")
     public void savePush(@RequestBody Push push) {
         pushService.savePush(push);
+        sseService.sendPushNotification(push.getId());
     }
 
     @DeleteMapping("/push")

@@ -1,10 +1,14 @@
 // WebhookController.java
 package mirea.enjoyers.BestHackBack.Controllers;
 
+import mirea.enjoyers.BestHackBack.Models.User;
 import mirea.enjoyers.BestHackBack.Services.SSEService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+
+import java.util.Objects;
 
 @RestController
 public class SSEController {
@@ -16,13 +20,9 @@ public class SSEController {
         this.webhookService = webhookService;
     }
 
-    @GetMapping("/push/get")
-    public SseEmitter handleSse() {
-        SseEmitter emitter = new SseEmitter();
-        webhookService.addEmitter(emitter);
-        emitter.onCompletion(() -> webhookService.removeEmitter(emitter));
-        emitter.onTimeout(() -> webhookService.removeEmitter(emitter));
-        return emitter;
+    @GetMapping("/push/get/{role}")
+    public SseEmitter handleSse(@PathVariable String role) {
+        return webhookService.handleSse(role);
     }
 
     @PostMapping("/push/send")

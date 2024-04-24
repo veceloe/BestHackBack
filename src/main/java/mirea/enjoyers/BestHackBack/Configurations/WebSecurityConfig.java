@@ -44,7 +44,7 @@ public class WebSecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/user").authenticated()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/admin/**", "/push/send").hasRole("ADMIN")
                         .requestMatchers(request -> request.getRequestURI().equals("/register")).permitAll()
                         .requestMatchers("/").permitAll()
                         .anyRequest().permitAll()

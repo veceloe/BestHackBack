@@ -1,6 +1,7 @@
 package mirea.enjoyers.BestHackBack.Services.Impls;
 
 import mirea.enjoyers.BestHackBack.Configurations.UserDetail;
+import mirea.enjoyers.BestHackBack.DTO.UserDto;
 import mirea.enjoyers.BestHackBack.Models.User;
 import mirea.enjoyers.BestHackBack.Repositories.RoleRepository;
 import mirea.enjoyers.BestHackBack.Repositories.UserRepository;
@@ -101,5 +102,15 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public void updateUser(UserDto updatedUser) {
+        User user = userRepository.findById(updatedUser.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id: " + updatedUser.getId()));
+
+        user.setRoles(updatedUser.getRole());
+
+        userRepository.save(user);
     }
 }

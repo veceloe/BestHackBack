@@ -1,5 +1,6 @@
 package mirea.enjoyers.BestHackBack.Services;
 
+import mirea.enjoyers.BestHackBack.DTO.UserDto;
 import mirea.enjoyers.BestHackBack.Models.User;
 
 import java.util.List;
@@ -11,4 +12,5 @@ public interface UserService {
     boolean deleteUser(Long userId);
     List<User> userGetList(Long idMin);
     User findByEmail(String email);
+    void updateUser(UserDto updatedUser);
 }

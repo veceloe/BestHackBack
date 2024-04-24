@@ -58,7 +58,7 @@ public class PushController {
         }
     }
 
-    @PostMapping("/push")
+    @PostMapping(value = "/push", consumes = {"application/json"})
     public void savePush(@RequestBody Push push) {
         pushService.savePush(push);
         sseService.sendPushNotification(push.getId());

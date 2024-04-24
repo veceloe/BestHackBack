@@ -20,10 +20,8 @@ public class SSEController {
     public SseEmitter handleSse() {
         SseEmitter emitter = new SseEmitter();
         webhookService.addEmitter(emitter);
-
         emitter.onCompletion(() -> webhookService.removeEmitter(emitter));
         emitter.onTimeout(() -> webhookService.removeEmitter(emitter));
-
         return emitter;
     }
 

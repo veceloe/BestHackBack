@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/admin")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://158.160.159.255")
 public class AdminController {
     private final UserServiceImpl userService;
     private final PushServiceImpl pushService;

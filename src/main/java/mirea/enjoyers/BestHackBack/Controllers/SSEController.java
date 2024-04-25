@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import java.util.Objects;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://158.160.159.255")
 public class SSEController {
 
     private final SSEService webhookService;

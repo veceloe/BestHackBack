@@ -27,7 +27,7 @@ public class PushController {
     private final PushService pushService;
     private final SSEService sseService;
 
-    @GetMapping("/")
+    @GetMapping("/pushes")
     public List<Push> pushes(@RequestParam(name = "title", required = false) String title) {
         return pushService.listPushes(title);
     }

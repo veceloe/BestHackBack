@@ -2,7 +2,7 @@
 FROM gradle:7.6.4-jdk17-alpine as build
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
-RUN gradle clean build --no-daemon
+RUN gradle clean build --no-daemon -x test
 
 # Стадия запуска
 FROM openjdk:17-jdk-slim

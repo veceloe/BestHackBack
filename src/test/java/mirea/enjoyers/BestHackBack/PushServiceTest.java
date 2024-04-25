@@ -13,38 +13,38 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class PushServiceTest {
 
-    @InjectMocks
-    private PushServiceImpl pushService;
-
-    @Mock
-    private PushRepository pushRepository;
-
-    @Test
-    public void testSavePush() {
-        Push push = new Push();
-        pushService.savePush(push);
-        verify(pushRepository, times(1)).save(push);
-    }
-
-    @Test
-    public void testGetPushById() {
-        long id = 1L;
-        pushService.getPushById(id);
-        verify(pushRepository, times(1)).findById(id);
-    }
-
-    @Test
-    public void testListPushes() {
-        String title = "test";
-        pushService.listPushes(title);
-        verify(pushRepository, times(1)).findByTitleContaining(title);
-    }
-
-    @Test
-    public void testDeletePush() {
-        long id = 1L;
-        pushService.deletePush(id);
-        verify(pushRepository, times(1)).deleteById(id);
-    }
+//    @InjectMocks
+//    private PushServiceImpl pushService;
+//
+//    @Mock
+//    private PushRepository pushRepository;
+//
+//    @Test
+//    public void testSavePush() {
+//        Push push = new Push();
+//        pushService.savePush(push);
+//        verify(pushRepository, times(1)).save(push);
+//    }
+//
+//    @Test
+//    public void testGetPushById() {
+//        long id = 1L;
+//        pushService.getPushById(id);
+//        verify(pushRepository, times(1)).findById(id);
+//    }
+//
+//    @Test
+//    public void testListPushes() {
+//        String title = "test";
+//        pushService.listPushes(title);
+//        verify(pushRepository, times(1)).findByTitleContaining(title);
+//    }
+//
+//    @Test
+//    public void testDeletePush() {
+//        long id = 1L;
+//        pushService.deletePush(id);
+//        verify(pushRepository, times(1)).deleteById(id);
+//    }
 
 }

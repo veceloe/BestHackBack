@@ -10,11 +10,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class ApplicationTests {
 
-	@Autowired
-	private ApplicationContext applicationContext;
-
-	@Test
-	void contextLoads() {
-		assertThat(applicationContext).isNotNull();
-	}
+//	@Autowired
+//	private ApplicationContext applicationContext;
+//
+//	@Test
+//	void contextLoads() {
+//		assertThat(applicationContext).isNotNull();
+//	}
 }

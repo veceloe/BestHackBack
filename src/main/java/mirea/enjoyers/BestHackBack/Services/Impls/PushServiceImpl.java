@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.security.Security;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -37,7 +38,7 @@ public class PushServiceImpl implements PushService {
                 pushes.addAll(pushRepository.findAllByRoleDestination(role.getName()));
             }
         }
-        pushes.sort((o1, o2) -> o2.getDatetime().compareTo(o1.getDatetime()));
+        pushes.sort(Comparator.comparing(Push::getDatetime));
         return pushes;
     }
 

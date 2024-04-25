@@ -6,11 +6,13 @@ import mirea.enjoyers.BestHackBack.Repositories.PushRepository;
 import mirea.enjoyers.BestHackBack.Repositories.UserRepository;
 import mirea.enjoyers.BestHackBack.Services.PushService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.security.Security;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -35,7 +37,7 @@ public class PushServiceImpl implements PushService {
                 pushes.addAll(pushRepository.findAllByRoleDestination(role.getName()));
             }
         }
-        pushes.addAll(pushRepository.findAllByRoleDestination("all"));
+        pushes.sort((o1, o2) -> o2.getDatetime().compareTo(o1.getDatetime()));
         return pushes;
     }
 

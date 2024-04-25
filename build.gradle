@@ -8,8 +8,6 @@ plugins {
 
 docker {
 	registryCredentials {
-		username = 'veceloe'
-		password = '3xOT1K,,,'
 	}
 
 	springBootApplication {

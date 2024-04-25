@@ -1,6 +1,7 @@
 package mirea.enjoyers.BestHackBack.Services.Impls;
 
 import mirea.enjoyers.BestHackBack.Models.Push;
+import mirea.enjoyers.BestHackBack.Models.Role;
 import mirea.enjoyers.BestHackBack.Repositories.PushRepository;
 import mirea.enjoyers.BestHackBack.Repositories.UserRepository;
 import mirea.enjoyers.BestHackBack.Services.PushService;
@@ -9,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.security.Security;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,12 +22,15 @@ public class PushServiceImpl implements PushService {
 
     @Override
     public List<Push> listPushes(String title) {
-        List<Push> pushes;
+        List<Push> pushes = new ArrayList<>();
         if (title != null) {
             pushes = pushRepository.findByTitleContaining(title);
         } else {
-            pushes = pushRepository.findAll();
+            for (Role role : userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).getRoles()) {
+                pushes.addAll(pushRepository.findAllByRoleDestination(role.getName()));
+            }
         }
+        pushes.addAll(pushRepository.findAllByRoleDestination("all"));
         return pushes;
     }
 

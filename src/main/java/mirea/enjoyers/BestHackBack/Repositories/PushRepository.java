@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface PushRepository extends JpaRepository<Push, Long> {
     List<Push> findByTitleContaining(String title);
+    List<Push> findAllByRoleDestination(String role);
 }

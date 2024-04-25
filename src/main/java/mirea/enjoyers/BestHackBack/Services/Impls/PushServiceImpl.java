@@ -26,7 +26,10 @@ public class PushServiceImpl implements PushService {
         if (title != null) {
             pushes = pushRepository.findByTitleContaining(title);
         } else {
-            for (Role role : userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).getRoles()) {
+            if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+                pushes = pushRepository.findAll();
+            }
+            else for (Role role : userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).getRoles()) {
                 pushes.addAll(pushRepository.findAllByRoleDestination(role.getName()));
             }
         }

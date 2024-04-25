@@ -10,6 +10,8 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 
 @Service
@@ -34,17 +36,19 @@ public class SSEService {
         Push push = pushService.getPushById(pushId);
         if (push != null) {
             String payload = getString(push);
-            for (SseEmitter emitter : emitters.keySet()) {
+            Iterator<Map.Entry<SseEmitter, String>> iterator = emitters.entrySet().iterator();
+            while (iterator.hasNext()) {
+                Map.Entry<SseEmitter, String> entry = iterator.next();
                 try {
-                    String emitterValue = emitters.get(emitter);
+                    String emitterValue = entry.getValue();
                     System.out.println(emitterValue + " " + push.getRoleDestination());
                     if (emitterValue != null &&
                             (emitterValue.contains(push.getRoleDestination())
-                            || push.getRoleDestination().equals("all"))) {
-                        emitter.send(payload);
+                                    || push.getRoleDestination().equals("all"))) {
+                        entry.getKey().send(payload);
                     }
                 } catch (IOException e) {
-                    removeEmitter(emitter);
+                    iterator.remove();
                 }
             }
         }

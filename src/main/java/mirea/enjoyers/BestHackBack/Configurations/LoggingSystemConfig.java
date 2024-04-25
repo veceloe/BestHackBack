@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class LoggingSystemConfig {
 
-    @Bean
-    public LoggingSystem loggingSystem() {
-        return LoggingSystem.get(ClassLoader.getSystemClassLoader());
-    }
+//    @Bean
+//    public LoggingSystem loggingSystem() {
+//        return LoggingSystem.get(ClassLoader.getSystemClassLoader());
+//    }
 }
